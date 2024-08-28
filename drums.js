@@ -14,7 +14,7 @@ const aspect = w / h;
 const near = 0.1;
 const far = 10;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.set(0,1.5,2);
+camera.position.set(0,1,2);
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -23,6 +23,11 @@ controls.dampingFactor = 0.03;
 
 // Scene
 const scene = new THREE.Scene();
+
+const textureLoader = new THREE.TextureLoader();
+const backgroundTexture = textureLoader.load('./hero.png');
+scene.background = backgroundTexture;
+
 
 // Light
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000, 10);
@@ -43,7 +48,7 @@ loader.load('src/models/drum_set/scene.gltf', function(gltf) {
     scene.add(model);
 
     // Position and scale the model if needed
-    model.position.set(-0.2, -1, 0);
+    model.position.set(0,-2, 0);
     model.scale.set(0.5, 0.5, 0.5); // Adjust the scale as needed
 }, undefined, function(error) {
     console.error('An error occurred while loading the model:', error);
@@ -65,8 +70,8 @@ function updateCamera(t) {
         const normalizedTime = Math.min(elapsedTime / oscillationDuration, 1);
 
         // Calculate the position based on the normalized time using a sine wave
-        const originalPosition = new THREE.Vector3(0, 1.5, 1); // Original position
-        const targetPosition = new THREE.Vector3(0, 1.5, 8); // Target position
+        const originalPosition = new THREE.Vector3(0, 1, 1); // Original position
+        const targetPosition = new THREE.Vector3(0, 1, 8); // Target position
         const lerpFactor = (Math.sin(normalizedTime * Math.PI) + 1) / 2; // Smooth oscillation
         const currentPosition = new THREE.Vector3().lerpVectors(originalPosition, targetPosition, lerpFactor);
 
