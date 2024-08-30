@@ -29,7 +29,7 @@ controls.dampingFactor = 0.03;
 const renderScene = new RenderPass(scene, camera);
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 1.5, 0.4, 100);
 bloomPass.threshold = 0.002;
-bloomPass.strength = 1;
+bloomPass.strength = 1.9;
 bloomPass.radius = 0.1;
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
